@@ -1,6 +1,6 @@
-# projet-symfony
+#titre projet-symfony
 
-##Installation
+##titre Installation
 
 ###Prérequis: avant de créer votre première application symfony, il faut installer quelques outils au préalable
   - installer PHP 7.4.5
