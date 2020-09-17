@@ -8,16 +8,16 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>CreatedAt</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Date de création</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for quack in quacks %}
             <tr>
-                <td>{{ quack.id }}</td>
+                <td>{{ quack.title}}</td>
                 <td>{{ quack.content }}</td>
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
