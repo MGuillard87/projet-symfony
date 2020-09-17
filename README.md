@@ -18,8 +18,8 @@
       DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
     
 ###Lancement du projet (commandes utiles)
- *_symfony server:start_ ou _symfony serve -d_ (lancer le serveur en arrière plan sur la console)
- *ctrl + c ou _symfony server:stop_ pour stopper le serveur
+ * _symfony server:start_ ou _symfony serve -d_ (lancer le serveur en arrière plan sur la console)
+ * ctrl + c ou _symfony server:stop_ pour stopper le serveur
  
  
   
