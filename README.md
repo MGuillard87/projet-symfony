@@ -15,6 +15,7 @@
 ###configuration du projet 
     - composer install (les dépendances)   
     - personnaliser le fichier .env, à la ligne ci-dessous, pour qu'il s'adapte à votre base de données: user, mot de passe, nom de la base de données  
+     copier le fichier .env.dist qui contient la configuration de l'environnement par défaut et le renommé .env   
       DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
     
 ###Lancement du projet (commandes utiles)  
