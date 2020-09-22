@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Duck;
+use App\Entity\Quack;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,4 +45,12 @@ class SecurityController extends AbstractController
     public function login(){
         return $this->render('security/login.html.twig');
     }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout(){
+
+    }
+
 }

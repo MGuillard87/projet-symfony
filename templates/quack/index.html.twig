@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Auteur</th>
                 <th>Titre</th>
                 <th>Contenu</th>
                 <th>Date de création</th>
@@ -17,6 +18,7 @@
         <tbody>
         {% for quack in quacks %}
             <tr>
+                <td>{{ quack.duck.firstname}}</td>
                 <td>{{ quack.title}}</td>
                 <td>{{ quack.content }}</td>
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -32,6 +34,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('quack_new') }}">Create new</a>
 {% endblock %}

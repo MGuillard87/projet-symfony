@@ -30,7 +30,9 @@ class QuackController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $quack = new Quack();
+        $quack->setDuck($this->getUser());
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
 
@@ -53,6 +55,7 @@ class QuackController extends AbstractController
      */
     public function show(Quack $quack): Response
     {
+        $quack->setDuck(($this->getUser()));
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
         ]);
@@ -91,4 +94,8 @@ class QuackController extends AbstractController
 
         return $this->redirectToRoute('quack_index');
     }
+
+//    public function contact(){
+//        Request::
+//    }
 }

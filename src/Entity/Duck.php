@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DuckRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,6 +57,16 @@ class Duck implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
      */
     private $confirm_password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Quack::class, mappedBy="duck", orphanRemoval=true)
+     */
+    private $quacks;
+
+    public function __construct()
+    {
+        $this->quacks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,5 +163,36 @@ class Duck implements UserInterface
     public function getUsername()
     {
         // TODO: Implement getUsername() method.
+    }
+
+    /**
+     * @return Collection|Quack[]
+     */
+    public function getQuacks(): Collection
+    {
+        return $this->quacks;
+    }
+
+    public function addQuack(Quack $quack): self
+    {
+        if (!$this->quacks->contains($quack)) {
+            $this->quacks[] = $quack;
+            $quack->setDuck($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuack(Quack $quack): self
+    {
+        if ($this->quacks->contains($quack)) {
+            $this->quacks->removeElement($quack);
+            // set the owning side to null (unless already changed)
+            if ($quack->getDuck() === $this) {
+                $quack->setDuck(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QuackRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=QuackRepository::class)
@@ -31,6 +32,12 @@ class Quack
      * @ORM\Column(type="text")
      */
     private $title;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Duck::class, inversedBy="quacks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $duck;
 
     public function getId(): ?int
     {
@@ -69,6 +76,18 @@ class Quack
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDuck(): ?Duck
+    {
+        return $this->duck;
+    }
+
+    public function setDuck(?UserInterface $duck): self
+    {
+        $this->duck = $duck;
 
         return $this;
     }
