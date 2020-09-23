@@ -18,14 +18,16 @@
         <tbody>
         {% for quack in quacks %}
             <tr>
-                <td>{{ quack.duck.firstname}}</td>
+                <td>{{ quack.duck.duckname}}</td>
                 <td>{{ quack.title}}</td>
                 <td>{{ quack.content }}</td>
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+{#                {% if quack.duck.id == app.user.id %}#}
                 <td>
                     <a href="{{ path('quack_show', {'id': quack.id}) }}">show</a>
                     <a href="{{ path('quack_edit', {'id': quack.id}) }}">edit</a>
                 </td>
+{#                {% endif %}#}
             </tr>
         {% else %}
             <tr>

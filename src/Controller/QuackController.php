@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Quack;
 use App\Form\QuackType;
 use App\Repository\QuackRepository;
+use App\Security\QuackVoter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,10 +57,16 @@ class QuackController extends AbstractController
      */
     public function show(Quack $quack): Response
     {
+
+        // check for "quack_edit" access: calls all voters
+        $this->denyAccessUnlessGranted(QuackVoter::SHOW, $quack);
+
         $quack->setDuck(($this->getUser()));
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
         ]);
+
+
     }
 
     /**
@@ -66,6 +74,9 @@ class QuackController extends AbstractController
      */
     public function edit(Request $request, Quack $quack): Response
     {
+        // check for "quack_edit" access: calls all voters
+        $this->denyAccessUnlessGranted(QuackVoter::EDIT, $quack);
+
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
 
@@ -86,6 +97,8 @@ class QuackController extends AbstractController
      */
     public function delete(Request $request, Quack $quack): Response
     {
+        $this->denyAccessUnlessGranted(QuackVoter::DELETE, $quack);
+
         if ($this->isCsrfTokenValid('delete'.$quack->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($quack);
